@@ -10,7 +10,6 @@
 #include <vector>
 #include <unordered_map>
 #include <codecvt>
-#include <iostream>
 
 class CI2Hrame
 {
@@ -38,8 +37,8 @@ public:
 	std::vector<LogItem> m_Logs;
 private:
 	const bool m_bCloseGC = false;
-	const LogLevel m_LogLevel = LogLevel::ALL;
-	const LogMode m_LogMode = LogMode::ALL;
+	const LogLevel m_LogLevel = LogLevel::Error;
+	const LogMode m_LogMode = LogMode::CONSOLE;
 	void Log(LogLevel level, const char* message, ...)
 	{
 		LogItem item;
@@ -184,7 +183,7 @@ namespace Signature
 			std::string signature = il2cpp_type_get_name(method->return_type) + std::string(" ") + method->name + "(";
 			for (int i = 0; i < method->parameters_count; i++)
 			{
-				signature += il2cpp_type_get_name(method->parameters[i].parameter_type) + std::string(", ");
+				signature += il2cpp_type_get_name(method->parameters[i]) + std::string(", ");
 			}
 			if (method->parameters_count > 0)
 			{
@@ -379,7 +378,7 @@ inline Il2CppMethodPointer CI2Hrame::GetMethod(Il2CppClass* pClass, std::string 
 		bool bParameters = true;
 		for (uint32_t j = 0; j < pMethod->parameters_count; j++)
 		{
-			if (std::string(il2cpp_type_get_name(pMethod->parameters[j].parameter_type)).compare(parameters[j]) != 0 && parameters[j].compare("AUTO") != 0)
+			if (std::string(il2cpp_type_get_name(pMethod->parameters[j])).compare(parameters[j]) != 0 && parameters[j].compare("AUTO") != 0)
 			{
 				bParameters = false;
 				break;
